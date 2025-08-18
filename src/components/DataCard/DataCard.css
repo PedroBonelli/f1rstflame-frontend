@@ -1,0 +1,9 @@
+:root{
+    --data-card-bg: #565656;
+}
+
+.data-card{
+    background-color: var(--data-card-bg);
+    width: 300px;
+    border-radius: 20px;
+}

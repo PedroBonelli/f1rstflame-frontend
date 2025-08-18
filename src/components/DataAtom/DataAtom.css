@@ -1,0 +1,10 @@
+.atom{
+    display: flex;
+}
+
+.atom-key{
+    font-weight: bold;
+}
+
+.atom-value{
+}
