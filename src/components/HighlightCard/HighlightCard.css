@@ -1,0 +1,18 @@
+:root{
+    --translucent-gradient: linear-gradient(90deg, rgba(255, 15, 19, 0.4) 0%, rgba(248, 155, 41, 0.4) 100%);
+    --opaque-gradient: linear-gradient(90deg, rgba(255, 15, 19, 1) 0%, rgba(248, 155, 41, 1) 100%);
+}
+
+.highlight-card{
+    background: var(--translucent-gradient);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 3px;
+    backdrop-filter: blur(12px) saturate(180%);
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 3px 1px 36px 5px rgba(248, 155, 41, 0.7);
+    -webkit-box-shadow: 3px 1px 36px 5px rgba(248, 155, 41, 0.7);
+    -moz-box-shadow: 3px 1px 36px 5px rgba(248, 155, 41, 0.7);
+}

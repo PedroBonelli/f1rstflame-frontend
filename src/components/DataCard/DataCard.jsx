@@ -1,15 +1,27 @@
 import './DataCard.css'
-import DataAtom from '../DataAtom/DataAtom.jsx'
+import '../../styling/styles.css'
+import { Box, DataList, Flex } from "@chakra-ui/react"
+import { InfoTip } from "@/components/ui/toggle-tip"
 
 function DataCard({title, data}){
 
     return (
-        <div className='data-card'>
-            <h2 className='data-card-title'>{title}</h2>
-            {Object.entries(data).map(([key, value], index) => (
-                <DataAtom className='data-card-data-atom' key={index} atomKey={key} atomValue={value}/>
-            ))}
-        </div>
+        <Box className='data-card poppable-card'>
+            <DataList.Root orientation="horizontal">
+                <h2>{title}</h2>
+                {Object.entries(data).map(([attr, content], index) => (
+                    <Flex>
+                        <DataList.Item key={index} display="flex" justifyContent="space-between" w="100%">
+                            <DataList.ItemLabel>
+                                {attr}
+                                <InfoTip>{content.help}</InfoTip>
+                            </DataList.ItemLabel>
+                            <DataList.ItemValue>{content.value}</DataList.ItemValue>
+                        </DataList.Item>
+                    </Flex>
+                ))}
+            </DataList.Root>
+        </Box>
     )
 }
 

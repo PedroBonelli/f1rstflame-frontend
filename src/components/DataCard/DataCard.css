@@ -1,9 +1,13 @@
 :root{
-    --data-card-bg: #565656;
+    --data-card-bg: rgba(255, 255, 255, 0.17);
 }
 
 .data-card{
     background-color: var(--data-card-bg);
-    width: 300px;
     border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }

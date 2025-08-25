@@ -1,0 +1,8 @@
+:root{
+    --opaque-gradient: linear-gradient(90deg, rgba(255, 15, 19, 1) 0%, rgba(248, 155, 41, 1) 100%);
+}
+
+
+.search-button{
+    background-image: var(--opaque-gradient);
+}
