@@ -1,5 +1,5 @@
 import {Box, Flex} from "@chakra-ui/react"
-import { Group, Input } from "@chakra-ui/react"
+import { Group, Input, Heading } from "@chakra-ui/react"
 import { IconButton } from "@chakra-ui/react"
 import { HiOutlineSearch } from "react-icons/hi";
 
@@ -7,7 +7,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 function NavBar(){
     return(
         <>
-        <Flex justify={"space-between"}>
+        <Flex justify={"space-between"} alignItems={"center"}>
             <Box>
                 <img src="/src/assets/logo.svg" alt="" />
             </Box>

@@ -1,10 +1,17 @@
 :root{
     --translucent-gradient: linear-gradient(90deg, rgba(255, 15, 19, 0.4) 0%, rgba(248, 155, 41, 0.4) 100%);
     --opaque-gradient: linear-gradient(90deg, rgba(255, 15, 19, 1) 0%, rgba(248, 155, 41, 1) 100%);
+    --translucent-gradient-animation: repeating-linear-gradient(
+    90deg,
+    rgba(255, 15, 19, 0.4) 0%,
+    rgba(248, 155, 41, 0.4) 50%,
+    rgba(255, 15, 19, 0.4) 100% /* loop back */
+  );
 }
 
 .highlight-card{
-    background: var(--translucent-gradient);
+    background: var(--translucent-gradient-animation);
+    background-size: 200% 100%;
     border-radius: 20px;
     padding: 25px;
     box-shadow: 3px;
@@ -15,4 +22,10 @@
     box-shadow: 3px 1px 36px 5px rgba(248, 155, 41, 0.7);
     -webkit-box-shadow: 3px 1px 36px 5px rgba(248, 155, 41, 0.7);
     -moz-box-shadow: 3px 1px 36px 5px rgba(248, 155, 41, 0.7);
+    animation: gradientShift 6s linear infinite;
+}
+
+@keyframes gradientShift{
+    0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
 }

@@ -1,17 +1,16 @@
 import { Box, Center, Heading, Stack, Image} from "@chakra-ui/react";
 import './HighlightCard.css'
-import '../../styling/styles.css'
 
 
-function HighlightCard(){
+function HighlightCard({title, heading, keyData}){
     return(
-        <Box className="highlight-card poppable-card">
-            <Heading>Resultado</Heading>
+        <Box className="highlight-card">
+            <Heading>{title}</Heading>
             <Center m={6}>
                 <Box>
                     <Stack>
-                        <Heading textAlign="center" size="2xl">Estagio previsto da empresa</Heading>
-                        <Heading textAlign="center" size="4xl">Expansão</Heading>
+                        <Heading textAlign="center" size="2xl">{heading}</Heading>
+                        <Heading textAlign="center" size="4xl">{keyData}</Heading>
                     </Stack>
                     <Box>
                         <Center><Image src="/src/assets/up-trend.svg" alt="" height="200px" /></Center>

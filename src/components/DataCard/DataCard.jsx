@@ -1,17 +1,16 @@
 import './DataCard.css'
-import '../../styling/styles.css'
 import { Box, DataList, Flex } from "@chakra-ui/react"
 import { InfoTip } from "@/components/ui/toggle-tip"
 
 function DataCard({title, data}){
 
     return (
-        <Box className='data-card poppable-card'>
+        <Box className='data-card'>
             <DataList.Root orientation="horizontal">
                 <h2>{title}</h2>
                 {Object.entries(data).map(([attr, content], index) => (
                     <Flex>
-                        <DataList.Item key={index} display="flex" justifyContent="space-between" w="100%">
+                        <DataList.Item key={index} w="100%" h="auto">
                             <DataList.ItemLabel>
                                 {attr}
                                 <InfoTip>{content.help}</InfoTip>
