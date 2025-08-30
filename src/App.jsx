@@ -4,12 +4,12 @@ import { SimpleGrid } from '@chakra-ui/react'
 import { Stack, Text } from '@chakra-ui/react'
 import {Box} from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
-import { Kbd } from '@chakra-ui/react'
 import HighlightCard from './components/HighlightCard/HighlightCard.jsx'
 import NavBar from './components/NavBar/NavBar.jsx'
 import InteractibleCard from './components/InteractibleCard/InteractibleCard.jsx'
 import './styling/app.css'
 import TypedText from './components/TypedText/TypedText.jsx'
+import { Tabs } from "@chakra-ui/react"
 
 const data = {
   key1: {value :"value1", help:"key1"},
@@ -44,6 +44,19 @@ function App() {
             <TypedText text={cnpj} fontSize="2xl" size="2xl"></TypedText>
           </Stack>
 
+          <Tabs.Root>
+            <Tabs.List>
+              <Tabs.Trigger value="strategic">
+                strategic
+              </Tabs.Trigger>
+              <Tabs.Trigger value="technical">
+                technical
+              </Tabs.Trigger>
+            </Tabs.List>
+            <Tabs.Content value="strategic"/>
+            <Tabs.Content value="technical" />
+          </Tabs.Root>
+
           <SimpleGrid columns={2} gap={6}>
             <Stack gap={6}>
               <SimpleGrid columns={2} gap={6}>
@@ -72,7 +85,7 @@ function App() {
           </SimpleGrid>
         </Box>
 
-        <Box as="section" p={10} className="section2">
+        <Box as="section" p={10} paddingTop={0} className="section2">
           <Stack>
             <SimpleGrid columns={2} gap={6}>
               <InteractibleCard>
