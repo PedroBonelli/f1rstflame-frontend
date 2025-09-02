@@ -15,7 +15,7 @@ function DataCard({title, data}){
                                 {attr}
                                 <InfoTip>{content.help}</InfoTip>
                             </DataList.ItemLabel>
-                            <DataList.ItemValue>{content.value}</DataList.ItemValue>
+                            <DataList.ItemValue>{String(content)}</DataList.ItemValue>
                         </DataList.Item>
                     </Flex>
                 ))}
