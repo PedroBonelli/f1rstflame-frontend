@@ -13,15 +13,17 @@ import { Tabs } from "@chakra-ui/react"
 import { useState } from 'react'
 import D3BarGraph from './components/D3BarGraph/D3BarGraph.jsx'
 import ProfileCard from './components/ProfileCard/ProfileCard.jsx'
+import { CiSearch } from "react-icons/ci";
 
-const data = {
-  key1: {value :"value1", help:"key1"},
-  key2: { value: "value2", help: "key2" },
-  key3: { value: "value3", help: "key3" },
-  key4: { value: "value4", help: "key4" },
-  key5: { value: "value5", help: "key5" },
-  key6: { value: "value3", help: "key6" },
-}
+
+// const data = {
+//   key1: {value :"value1", help:"key1"},
+//   key2: { value: "value2", help: "key2" },
+//   key3: { value: "value3", help: "key3" },
+//   key4: { value: "value4", help: "key4" },
+//   key5: { value: "value5", help: "key5" },
+//   key6: { value: "value3", help: "key6" },
+// }
 
 function App() {
 
@@ -67,7 +69,7 @@ function App() {
         <>
           <Stack marginBottom={10}>
             <Heading textAlign="center" size="3xl" marginBottom={3}>
-              Análise CNPJ
+              CNPJ
             </Heading>
             <TypedText text={apiReturn.business_input.business_id} fontSize="2xl" size="2xl"></TypedText>
           </Stack>
@@ -92,24 +94,15 @@ function App() {
 
               <Box as="section" p={10} h="100%" className="strategic-model">
 
-                <Heading textAlign={'center'} marginBottom={5}>Modelo</Heading>
+                <Heading textAlign={'center'} size="4xl" marginBottom={5}>Modelo</Heading>
 
                 <SimpleGrid columns={2} gap={6}>
-                  <InteractibleCard>
-                    <D3BarGraph data={[
-                      { letter: "A", frequency: 0.08167 },
-                      { letter: "B", frequency: 0.01492 },
-                      { letter: "C", frequency: 0.02782 },
-                      { letter: "D", frequency: 0.04253 },
-                      { letter: "E", frequency: 0.12702 },
-                      { letter: "F", frequency: 0.02228 },
-                    ]}></D3BarGraph>
-                  </InteractibleCard>
                 </SimpleGrid>
                 
-                <Box marginTop={10} marginBottom={10}>
+                <Box marginTop={10}>
                     <Stack>
-                      <Heading marginBottom={5} textAlign={'center'}>Perfis encontrados: Exemplos médios</Heading>
+                      <Heading marginBottom={3} textAlign={'center'}>Perfis encontrados</Heading>
+                      <Text textAlign='center' marginBottom={3}>Esses são exemplos médios de uma empresa em cada estágio de maturidade</Text>
                       <SimpleGrid columns={4} gap={6}>
                         <InteractibleCard>
                           <ProfileCard profile={apiReturn.general_model_metrics.profiles[0]}></ProfileCard>
@@ -131,7 +124,7 @@ function App() {
 
               <Box as="section" p={10} h="100%" className="strategic-analysis">
 
-                <Heading textAlign={'center'} marginBottom={5}>Análise</Heading>
+                <Heading textAlign={'center'} marginBottom={5} size="4xl">Análise</Heading>
 
                 <InteractibleCard>
                   <DataCard
@@ -145,7 +138,7 @@ function App() {
                         "Data de referência dos dados": `${String(apiReturn.business_input.data_ref)}`,
                       }
                     }
-                    title="Input do modelo" />
+                    title="Dados da empresa" />
                 </InteractibleCard>
 
                 <Box marginTop={10}>
@@ -183,11 +176,11 @@ function App() {
                   <DataCard
                     data={{
                       "Score WCSS": `${String(apiReturn.general_model_metrics.model_validation.score_wcss)}`,
-                        "Valor de K": `${String(apiReturn.general_model_metrics.model_validation.k_value)}`,
-                        "Score Silhouette Médio": String(apiReturn.general_model_metrics.model_validation.average_silhouette),
+                      "Valor de K": `${String(apiReturn.general_model_metrics.model_validation.k_value)}`,
+                      "Score Silhouette Médio": String(apiReturn.general_model_metrics.model_validation.average_silhouette),
                       "Score Calinksi-Harabasz": `${String(apiReturn.general_model_metrics.model_validation.score_calisnki_harabasz)}`,
                       "Score Davies-Bouldin": `${String(apiReturn.general_model_metrics.model_validation.score_davies_bouldin)}`,
-                      }}
+                    }}
                     title="Métricas de validação e acurácia" />
                 </InteractibleCard>
 
@@ -197,18 +190,49 @@ function App() {
 
                 <Heading textAlign={'center'} marginBottom={5}>Análise</Heading>
 
-                <InteractibleCard marginY={5}>
-                  <DataCard
-                    data={{
-                      "Score Silhouette": `${String(apiReturn.analysis_metrics.confidence_metrics.instace_silhouette_score)}`,
-                      "Distância ao centroide do cluster sugerido": `${String(apiReturn.analysis_metrics.confidence_metrics.distance_assigned_centroid)}`,
-                    }}
-                    title="Métricas de confiabilidade da análise" />
-                </InteractibleCard>
+
+                <SimpleGrid columns={2} gap={6}>
+
+                  <InteractibleCard marginY={5}>
+                    <DataCard
+                      data={{
+                        "Score Silhouette": `${String(apiReturn.analysis_metrics.confidence_metrics.instace_silhouette_score)}`,
+                        "Distância ao centroide do cluster sugerido": `${String(apiReturn.analysis_metrics.confidence_metrics.distance_assigned_centroid)}`,
+                      }}
+                      title="Métricas de confiabilidade da análise" />
+                  </InteractibleCard>
+
+                  <InteractibleCard marginY={5}>
+                    <DataCard
+                      data={{
+                        "ID da Análise" : `${String(apiReturn.analysis_id)}`,
+                        "Tempo de processamento": `${String(apiReturn.processing_time_seconds)}s`,
+                        "Momento da análise": `${String(apiReturn.timestamp)}`,
+                      }}
+                      title="Dados da operação" />
+                  </InteractibleCard>
+
+                </SimpleGrid>
+
+                
 
                 <InteractibleCard>
                   <D3BarGraph data={apiReturn.analysis_metrics.cluster_distances} title={"Distância dos centroides dos clusters"}></D3BarGraph>
                 </InteractibleCard>
+
+                <Box marginTop={10}>
+                  <Stack>
+                    <Heading marginBottom={5} textAlign={'center'}>Perfil do cluster alvo x Perfil da análise</Heading>
+                    <SimpleGrid columns={2} gap={6}>
+                      <InteractibleCard>
+                        <ProfileCard profile={apiReturn.analysis_metrics.profile_fit.target_profile}></ProfileCard>
+                      </InteractibleCard>
+                      <InteractibleCard>
+                        <ProfileCard profile={apiReturn.analysis_metrics.profile_fit.analysis_profile}></ProfileCard>
+                      </InteractibleCard>
+                    </SimpleGrid>
+                  </Stack>
+                </Box>
 
               </Box> 
             </Tabs.Content>
@@ -221,12 +245,9 @@ function App() {
       <>
         <Center marginTop="13%">
           <Stack alignItems={'center'}>
-            <Heading>Busque por um código de operação <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-</Heading>
+            <Heading display="flex" alignItems="center" gap="8px">Busque uma análise<CiSearch size="2.0em" /></Heading>
             <p>
-              Basta inserir o código no campo acima e selecionar o botão :)
+              Basta inserir o código no campo acima e selecionar o botão
             </p>
           </Stack>
         </Center>

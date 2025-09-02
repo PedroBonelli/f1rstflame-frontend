@@ -34,7 +34,7 @@ function HighlightCard({title, heading, keyDataId, keyData, secondaryData}){
                         {/* <Center><Image src={resourcePath} alt="" height="200px" /></Center> */}
                         
                     </Box>
-                    <Heading textAlign="center" size="2xl">{`Confiabilidade - ${secondaryData*100}%`}</Heading>
+                    <Heading textAlign="center" size="2xl">{`Confiabilidade de ${secondaryData*100}%`}</Heading>
                 </Box>
             </Center>
         </Box>

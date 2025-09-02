@@ -4,7 +4,7 @@ import './ProfileCard.css'
 function ProfileCard({profile}){
     return(
         <Box className="profile-card">
-            <Heading>{profile.profile_cluster_description}</Heading>
+            <Heading>{`Estágio - ${profile.profile_cluster_description}`}</Heading>
             <Stack marginTop={5}>
                 <DataList.Root orientation="horizontal">
                     {profile.features.map(({feature_name, feature_profile_value}, index) => (
