@@ -14,6 +14,7 @@ import { useState } from 'react'
 import D3BarGraph from './components/D3BarGraph/D3BarGraph.jsx'
 import ProfileCard from './components/ProfileCard/ProfileCard.jsx'
 import { CiSearch } from "react-icons/ci";
+import ClusterDistributionGraph from './components/ClusterDistributionGraph/ClusterDistributionGraph.jsx'
 
 
 // const data = {
@@ -97,6 +98,7 @@ function App() {
                 <Heading textAlign={'center'} size="4xl" marginBottom={5}>Modelo</Heading>
 
                 <SimpleGrid columns={2} gap={6}>
+                  <ClusterDistributionGraph clusterDistributionList={apiReturn.general_model_metrics.distribution}></ClusterDistributionGraph>
                 </SimpleGrid>
                 
                 <Box marginTop={10}>
