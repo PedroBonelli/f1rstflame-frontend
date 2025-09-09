@@ -15,6 +15,10 @@ import D3BarGraph from './components/D3BarGraph/D3BarGraph.jsx'
 import ProfileCard from './components/ProfileCard/ProfileCard.jsx'
 import { CiSearch } from "react-icons/ci";
 import ClusterDistributionGraph from './components/ClusterDistributionGraph/ClusterDistributionGraph.jsx'
+import CustomCardGraph from './components/CustomCardGraph/CustomCardGraph.jsx'
+import ProfilesSpiderGraph from './components/ProfilesSpiderGraph/ProfilesSpiderGraph.jsx'
+import ClusterCentroidDistanceGraph from './components/ClusterCentroidDistanceGraph/ClusterCentroidDistanceGraph.jsx'
+import { Skeleton, SkeletonCircle, SkeletonText } from "@chakra-ui/react"
 
 
 // const data = {
@@ -53,9 +57,14 @@ function App() {
   const renderContent = () => {
     if(isLoading){
       return(
-        <p>
-          is Loading...
-        </p>
+        <Center>
+          <Stack>
+            <SimpleGrid columns={2}>
+              <Skeleton height="10" />
+              <Skeleton height="10" width="" />
+            </SimpleGrid>
+          </Stack>
+        </Center>
       )
     }
 
@@ -93,37 +102,6 @@ function App() {
                 animationDuration: "120ms",
               }}>
 
-              <Box as="section" p={10} h="100%" className="strategic-model">
-
-                <Heading textAlign={'center'} size="4xl" marginBottom={5}>Modelo</Heading>
-
-                <SimpleGrid columns={2} gap={6}>
-                  <ClusterDistributionGraph clusterDistributionList={apiReturn.general_model_metrics.distribution}></ClusterDistributionGraph>
-                </SimpleGrid>
-                
-                <Box marginTop={10}>
-                    <Stack>
-                      <Heading marginBottom={3} textAlign={'center'}>Perfis encontrados</Heading>
-                      <Text textAlign='center' marginBottom={3}>Esses são exemplos médios de uma empresa em cada estágio de maturidade</Text>
-                      <SimpleGrid columns={4} gap={6}>
-                        <InteractibleCard>
-                          <ProfileCard profile={apiReturn.general_model_metrics.profiles[0]}></ProfileCard>
-                        </InteractibleCard>
-                        <InteractibleCard>
-                          <ProfileCard profile={apiReturn.general_model_metrics.profiles[1]}></ProfileCard>
-                        </InteractibleCard>
-                        <InteractibleCard>
-                          <ProfileCard profile={apiReturn.general_model_metrics.profiles[2]}></ProfileCard>
-                        </InteractibleCard>
-                        <InteractibleCard>
-                          <ProfileCard profile={apiReturn.general_model_metrics.profiles[3]}></ProfileCard>
-                        </InteractibleCard>
-                      </SimpleGrid>
-                    </Stack>
-                </Box>
-
-              </Box>  
-
               <Box as="section" p={10} h="100%" className="strategic-analysis">
 
                 <Heading textAlign={'center'} marginBottom={5} size="4xl">Análise</Heading>
@@ -145,17 +123,58 @@ function App() {
 
                 <Box marginTop={10}>
                   <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-                      <GridItem colSpan={3}>
+                    <GridItem colSpan={3}>
                       <InteractibleCard>
-                        <HighlightCard title="Perfil Principal" heading="Momento da empresa" keyData={apiReturn.analysis_metrics.fit.cluster_description} keyDataId={apiReturn.analysis_metrics.fit.cluster_id} secondaryData={apiReturn.analysis_metrics.fit.confiability_score}/>
+                        <HighlightCard title="Perfil Principal" heading="Momento da empresa" keyData={apiReturn.analysis_metrics.fit.cluster_description} keyDataId={apiReturn.analysis_metrics.fit.cluster_id} secondaryData={apiReturn.analysis_metrics.fit.confiability_score} />
                       </InteractibleCard>
-                      </GridItem>
+                    </GridItem>
                     <GridItem colSpan={1}>
                       <InteractibleCard>
-                        <HighlightCard title="Perfil secundário" heading="Momento da empresa" keyData={apiReturn.analysis_metrics.next_best_fit.cluster_description} keyDataId={apiReturn.analysis_metrics.next_best_fit.cluster_id} secondaryData={apiReturn.analysis_metrics.next_best_fit.confiability_score}/>
+                        <HighlightCard title="Perfil secundário" heading="Momento da empresa" keyData={apiReturn.analysis_metrics.next_best_fit.cluster_description} keyDataId={apiReturn.analysis_metrics.next_best_fit.cluster_id} secondaryData={apiReturn.analysis_metrics.next_best_fit.confiability_score} />
                       </InteractibleCard>
-                      </GridItem>
-                    </Grid>
+                    </GridItem>
+                  </Grid>
+                </Box>
+
+              </Box>  
+
+              <Box as="section" p={10} h="100%" className="strategic-model">
+
+                <Heading textAlign={'center'} size="4xl" marginBottom={5}>Modelo</Heading>
+
+                
+                
+                <Box marginTop={10}>
+                      <Stack>
+
+                        <SimpleGrid columns={2}>
+                            <InteractibleCard w={'800px'} h={'800px'} marginTop={'80px'}>
+                              <CustomCardGraph w={'800px'} h={'950px'}>
+                                <Heading marginBottom={10}>Distribuição dos perfis</Heading>
+                                <ClusterDistributionGraph clusterDistributionList={apiReturn.general_model_metrics.distribution}></ClusterDistributionGraph>
+                              </CustomCardGraph>
+                            </InteractibleCard>
+                         
+                        
+                        <Stack gap={6}>
+                        <Heading textAlign='center' size={'2xl'}>Exemplos de perfil </Heading>
+                        
+                          <InteractibleCard>
+                            <ProfileCard profile={apiReturn.general_model_metrics.profiles[0]}></ProfileCard>
+                          </InteractibleCard>
+                          <InteractibleCard>
+                            <ProfileCard profile={apiReturn.general_model_metrics.profiles[1]}></ProfileCard>
+                          </InteractibleCard>
+                          <InteractibleCard>
+                            <ProfileCard profile={apiReturn.general_model_metrics.profiles[2]}></ProfileCard>
+                          </InteractibleCard>
+                          <InteractibleCard>
+                            <ProfileCard profile={apiReturn.general_model_metrics.profiles[3]}></ProfileCard>
+                          </InteractibleCard>
+                        </Stack>
+                          
+                        </SimpleGrid>
+                      </Stack>
                 </Box>
 
               </Box>  
@@ -172,7 +191,20 @@ function App() {
               }}>
               <Box as="section" p={10} h="100%" className="technical-model">
 
-                <Heading textAlign={'center'} marginBottom={5}>Modelo</Heading>
+                <Heading textAlign={'center'} marginBottom={5} size="4xl">Modelo</Heading>
+
+                <SimpleGrid marginY={10} gap={12} columns={2}>
+                  <InteractibleCard>
+                    <CustomCardGraph w={'900px'} h={'900px'}>
+                      <Heading marginBottom={10}>Comportamento dos clusters</Heading>
+                      <ProfilesSpiderGraph profileData={apiReturn.general_model_metrics.profiles}></ProfilesSpiderGraph>
+                    </CustomCardGraph>
+                  </InteractibleCard>
+
+                  <InteractibleCard h={'100%'}>
+                    <GraphCard title={"Separação dos clusters"} graphURL={'src/assets/clusters.png'}></GraphCard>
+                  </InteractibleCard>
+                </SimpleGrid>
 
                 <InteractibleCard>
                   <DataCard
@@ -190,7 +222,7 @@ function App() {
 
               <Box as="section" p={10} h="100%" className="technical-analysis">
 
-                <Heading textAlign={'center'} marginBottom={5}>Análise</Heading>
+                <Heading textAlign={'center'} marginBottom={5} size="4xl">Análise</Heading>
 
 
                 <SimpleGrid columns={2} gap={6}>
@@ -216,10 +248,12 @@ function App() {
 
                 </SimpleGrid>
 
-                
-
                 <InteractibleCard>
-                  <D3BarGraph data={apiReturn.analysis_metrics.cluster_distances} title={"Distância dos centroides dos clusters"}></D3BarGraph>
+                  <CustomCardGraph>
+                    <Heading marginBottom={10}>Distância ao centroid do cluster por cluster</Heading>
+                    <ClusterCentroidDistanceGraph clusterCentroidDistanceData={apiReturn.analysis_metrics.cluster_distances}>
+                    </ClusterCentroidDistanceGraph>
+                  </CustomCardGraph>
                 </InteractibleCard>
 
                 <Box marginTop={10}>
@@ -233,6 +267,7 @@ function App() {
                         <ProfileCard profile={apiReturn.analysis_metrics.profile_fit.analysis_profile}></ProfileCard>
                       </InteractibleCard>
                     </SimpleGrid>
+                    
                   </Stack>
                 </Box>
 
